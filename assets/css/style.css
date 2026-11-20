@@ -390,3 +390,14 @@ input[type=password]{padding-right:40px}
 /* Animations R1 fix: Champions strip must overflow at desktop widths too, or its arrows and auto-advance have nothing to move (cards were sized to fit the row exactly). */
 .strip .champ{flex:0 0 230px}
 .strip .champ.centre{flex:0 0 340px}
+
+/* ===== Phone points P-08/P-09/P-11 (Snow phone check, 2026-11-20) ===== */
+@media(max-width:640px){
+.strip .champ{flex:0 0 44vw}
+.strip .champ.centre{flex:0 0 82vw}
+.tcard .slot-poster{padding:10px 6px}
+.tcard .slot-label{font-size:10px;letter-spacing:.03em;padding:2px 4px}
+.filter-chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;justify-content:stretch}
+.filter-chips>span{grid-column:1/-1}
+.filter-chips .chip{width:100%}
+}
