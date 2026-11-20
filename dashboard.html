@@ -5,21 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>User Dashboard - PlayZyro</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='15' fill='none' stroke='%23b6ff2e' stroke-width='3'/%3E%3Ctext x='22' y='30' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23b6ff2e'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20e">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20g">
 <script>window.PZ_VARIANT = 'v6';</script>
-<script src="assets/js/app.js?v=2026-11-20e"></script>
+<script src="assets/js/app.js?v=2026-11-20g"></script>
 </head>
 <body>
 <header class="site"><div class="header-in">
 <a class="logo" href="index.html"><svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="15" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><path d="M22 2v9M22 33v9M2 22h9M33 22h9" stroke="#b6ff2e" stroke-width="2.5"/><text x="22" y="29" text-anchor="middle" font-family="Arial Narrow,Arial" font-weight="700" font-size="17" fill="#b6ff2e">Z</text></svg><span class="wordmark">PLAY<b>Z</b>YRO</span></a>
-<nav class="main"><a href="dashboard.html" class="active">Dashboard</a><a href="tournaments.html">Tournaments</a><a href="index.html">Home</a><a href="about.html">About</a><a href="admin.html">Admin</a></nav>
+<nav class="main"><a href="index.html">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html">About</a><a href="dashboard.html" class="active">Dashboard</a><a href="admin.html">Admin</a></nav>
 <div class="header-actions"><span class="dash-user"><span class="bell" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg></span><span class="avatar-lg" id="dashAvatar">?</span><span class="user-chip" data-user-chip></span></span></div>
 <button class="nav-toggle" type="button" data-nav-toggle aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </div></header>
 <div class="drawer-backdrop" data-drawer-backdrop hidden></div>
 <aside class="drawer" data-drawer aria-hidden="true">
 <div class="drawer-head"><span class="wordmark">PLAY<b>Z</b>YRO</span><button class="drawer-close" type="button" data-drawer-close aria-label="Close menu">&times;</button></div>
-<nav class="drawer-nav"><a href="dashboard.html" class="active">Dashboard</a><a href="tournaments.html">Tournaments</a><a href="index.html">Home</a><a href="about.html">About</a><a href="admin.html">Admin</a></nav>
+<nav class="drawer-nav"><a href="index.html">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html">About</a><a href="dashboard.html" class="active">Dashboard</a><a href="admin.html">Admin</a></nav>
 <div class="drawer-foot"><span class="user-chip" data-user-chip></span></div>
 </aside>
 <main class="wrap">
@@ -28,7 +28,6 @@
 <div class="grid-top">
 <div>
 <h1>Tournament Hub</h1>
-<h2 style="color:var(--muted)">Squad Operations</h2>
 <p class="muted">Welcome, <span id="dashUser"></span>. Your squad, your tournaments and your match room, in one place.</p>
 </div>
 <div class="hud room-box">
@@ -40,7 +39,7 @@
 <section class="block">
 <div class="grid-dash">
 <div class="hud">
-<div class="hud-head"><h3 id="squadTitle">My Squad</h3><span class="tag" id="squadCode"></span></div>
+<div class="hud-head"><h3 id="squadTitle">My Squad <span class="sec-label">// Squad Operations</span></h3><span class="tag" id="squadCode"></span></div>
 <div id="squadArea"></div>
 </div>
 <div class="hud">

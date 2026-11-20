@@ -291,6 +291,59 @@ footer.site a:hover{color:var(--lime)}
  .kv{grid-template-columns:1fr 1fr}
 }
 
+/* ===== UI/UX round (Snow-approved analysis, 2026-11-20) ===== */
+.wrap,.header-in,.footer-grid,.footer-bottom,.demo-note,.auth-scene,.auth-honest{max-width:1240px}
+.feat-strip{flex-wrap:nowrap}
+.feat-strip .btn{margin-left:auto;flex:none}
+@media(max-width:640px){.feat-strip{flex-wrap:wrap}}
+.strip{scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.champ{display:flex;flex-direction:column}
+.champ .slot-photo{min-height:130px}
+.champ.centre .slot-photo{min-height:130px}
+.champ .cw-k{font-size:12px;color:#cfe0ab}
+.champ .cw-v{font-size:16px}
+.op-time{color:#d3e2b4}
+.scroll-hint{color:#cfe0ab;font-size:12.5px}
+.demo-note{color:#cfe0ab}
+.ev-row .muted{color:#cfe0ab}
+@media(min-width:761px){.op-panel{padding:18px 34px}}
+.op-tl{max-width:920px}
+.op-row{margin:16px 0}
+.step{padding-bottom:36px}
+.step .ghost{position:absolute;right:12px;bottom:4px;font-family:var(--mono);font-size:27px;font-weight:700;color:rgba(182,255,46,.13);line-height:1}
+.chips{justify-content:flex-start!important}
+.chips>span:last-child{flex:0 1 360px!important;min-width:0!important;margin-left:auto}
+.sched-rail{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));overflow:visible}
+@media(max-width:640px){.sched-rail{grid-template-columns:1fr}}
+.tstrip-wrap{position:relative}
+.tstrip-wrap .strip-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:6;background:rgba(13,17,7,.88)}
+.tstrip-wrap .strip-btn:first-child{left:8px}
+.tstrip-wrap .strip-btn:last-child{right:8px}
+.hud-head.title-row{justify-content:flex-start;gap:14px}
+.empty-state{border:1px dashed var(--line2);padding:12px 16px;color:var(--muted);margin-top:20px;background:rgba(0,0,0,.2)}
+.auth-scene{align-items:stretch}
+input[type=password]{padding-right:40px}
+.auth-honest{margin:0 auto;font-size:12.5px}
+.member-row{flex-wrap:nowrap}
+.member-row .ready{white-space:nowrap;flex:none}
+.squad-flex{flex-direction:column}
+.squad-photo{flex:none;min-height:150px;width:100%}
+.grid-dash{align-items:stretch}
+.code-in{font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase}
+#sec-users td{padding:8px 12px}
+#sec-users td:last-child{white-space:nowrap}
+#sec-users td:nth-child(2){white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px}
+.grid-admin{display:flex;gap:20px;align-items:flex-start}
+.admin-col{flex:1 1 0;display:flex;flex-direction:column;gap:20px;min-width:0}
+@media(max-width:760px){.grid-admin{flex-direction:column}.admin-col{width:100%}}
+.scroll-hint{display:none}
+@media(max-width:900px){.scroll-hint{display:block}}
+.tm-item{padding:13px 14px}
+.tm-item .muted{display:block;font-size:13.5px;margin-top:2px}
+.about-hud p{max-width:70ch;line-height:1.65}
+.terms-hud p{font-size:16.5px;line-height:1.65;color:var(--text)}
+
 /* ===== PlayZyro Animations R1 (panel-approved S1-S5 + O1-O4, Chat 3) =====
    Rules: content visible on load, entrance starts from visible, no scroll-reveal,
    animations are never gated on any motion preference setting. */
