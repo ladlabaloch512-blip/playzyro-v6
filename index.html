@@ -136,8 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var f = document.getElementById('featured');
   PZ.db.tournaments.slice(0, 2).forEach(function (t) {
     var d = document.createElement('div'); d.className = 'feat-card';
-    d.innerHTML = '<div class="slot slot-poster feat-poster"><svg width="46" height="46" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="13" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><path d="M22 2v10M22 32v10M2 22h10M32 22h10" stroke="#b6ff2e" stroke-width="2.5"/><circle cx="22" cy="22" r="3" fill="#b6ff2e"/></svg><span class="slot-label">Poster Placeholder</span></div>' +
-      '<div class="feat-overlay"><h3>' + PZ.esc(t.name) + '</h3></div>' +
+    d.innerHTML = '<div class="slot slot-poster feat-poster"><svg width="46" height="46" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="13" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><path d="M22 2v10M22 32v10M2 22h10M32 22h10" stroke="#b6ff2e" stroke-width="2.5"/><circle cx="22" cy="22" r="3" fill="#b6ff2e"/></svg><span class="slot-label">Poster Placeholder</span><div class="feat-overlay"><h3>' + PZ.esc(t.name) + '</h3></div></div>' +
       '<div class="feat-strip"><span>Status: ' + PZ.esc(t.status) + '</span><span>Date: ' + PZ.esc(t.dateText) + '</span>' +
       '<a class="btn small" href="tournament.html?id=' + t.id + '">Register</a></div>';
     f.appendChild(d);

@@ -87,7 +87,7 @@ tr:last-child td{border-bottom:none}
 .feat-card::before{top:-2px;left:-2px;border-top:3px solid var(--lime);border-left:3px solid var(--lime)}
 .feat-card::after{bottom:-2px;right:-2px;border-bottom:3px solid var(--lime);border-right:3px solid var(--lime)}
 .feat-poster{min-height:215px;border:none;border-bottom:1px solid var(--line)}
-.feat-overlay{position:absolute;left:16px;right:16px;bottom:56px;z-index:2;text-shadow:0 2px 8px rgba(0,0,0,.65)}
+.feat-overlay{position:absolute;left:16px;right:16px;bottom:12px;z-index:2;text-shadow:0 2px 8px rgba(0,0,0,.65)}
 .feat-overlay h3{margin:0;font-size:22px;color:#fff}
 .feat-strip{display:flex;justify-content:space-between;align-items:center;gap:12px;background:rgba(0,0,0,.5);border-top:1px solid var(--line2);padding:9px 14px;font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.05em;flex-wrap:wrap}
 /* champions rotation */
@@ -288,7 +288,6 @@ footer.site a:hover{color:var(--lime)}
  .tcard{flex:none;width:100%}
  .tstrip-wrap .strip-btn{display:none}
  .kv{grid-template-columns:1fr 1fr}
- .feat-overlay{bottom:64px}
 }
 
 /* ===== PlayZyro Animations R1 (panel-approved S1-S5 + O1-O4, Chat 3) =====
