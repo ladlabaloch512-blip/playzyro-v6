@@ -321,3 +321,8 @@ footer.site a:hover{color:var(--lime)}
 .pz-reveal{animation:pzReveal .5s ease-out}
 @keyframes pzReveal{from{opacity:.55;transform:scale(.985)}to{opacity:1;transform:scale(1)}}
 
+/* Animations R1 fix: open state for the FAQ answer wrapper (was missing, answers could not expand). */
+.faq-item.pz-open .pz-faq-a{grid-template-rows:1fr}
+/* Animations R1 fix: Champions strip must overflow at desktop widths too, or its arrows and auto-advance have nothing to move (cards were sized to fit the row exactly). */
+.strip .champ{flex:0 0 230px}
+.strip .champ.centre{flex:0 0 340px}

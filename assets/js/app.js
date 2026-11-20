@@ -3,7 +3,7 @@
    tournaments and room credentials are created through the site's own flows.
    Mirrors the later WordPress tables: users, squads, tournaments, events,
    applications, assignments, rooms. */
-window.PZ_VERSION = '2026-11-20b';
+window.PZ_VERSION = '2026-11-20c';
 (function () {
   var V = window.PZ_VARIANT || 'vx';
   var KEY = 'pz_' + V + '_db_v1';
@@ -158,26 +158,36 @@ window.PZ_VERSION = '2026-11-20b';
 function ready(f){if(document.readyState!=='loading')f();else document.addEventListener('DOMContentLoaded',f);}
 function each(sel,fn){document.querySelectorAll(sel).forEach(fn);}
 ready(function(){
-  /* S3 FAQ accordion, single-open. JS-off: answers stay fully visible. */
-  
-  each('.faq-item',function(it,i){
-    var h=it.querySelector('h3'),p=it.querySelector('p');
-    if(!h||!p||it.getAttribute('data-pz-faq'))return;
-    it.setAttribute('data-pz-faq','1');
-    h.classList.add('pz-faq-q');
-    var chev=document.createElement('span');chev.className='pz-chev';chev.setAttribute('aria-hidden','true');h.appendChild(chev);
-    var a=document.createElement('div');a.className='pz-faq-a';
-    var inner=document.createElement('div');inner.className='pz-faq-in';
-    it.insertBefore(a,p);a.appendChild(inner);inner.appendChild(p);
-    if(i===0)it.classList.add('pz-open');
-    h.addEventListener('click',function(){
-      var was=it.classList.contains('pz-open');
-      each('.faq-item',function(o){o.classList.remove('pz-open');});
-      if(!was)it.classList.add('pz-open');
+/* S3 FAQ: height-animated accordion, single-open (panel ruling) */
+  (function(){
+    var items=Array.prototype.slice.call(document.querySelectorAll('.faq-item')); if(!items.length)return;
+    function wrapOf(it){return it.querySelector('.pz-faq-a');}
+    function innerOf(it){return it.querySelector('.pz-faq-in');}
+    function slide(it,to){
+      var w=wrapOf(it); if(!w)return;
+      var from=w.getBoundingClientRect().height;
+      w.style.height=to+'px';
+      if(w.animate){var an=w.animate([{height:from+'px'},{height:to+'px'}],{duration:290,easing:'ease-in-out'}); if(an&&an.finished)an.finished.catch(function(){});}
+    }
+    items.forEach(function(it,idx){
+      var h=it.querySelector('h3'); if(!h)return;
+      h.classList.add('pz-faq-q');
+      if(!h.querySelector('.pz-chev')){var c=document.createElement('span');c.className='pz-chev';c.textContent='';h.appendChild(c);}
+      var p=it.querySelector('p');
+      if(p && !p.closest('.pz-faq-a')){var w=document.createElement('div');w.className='pz-faq-a';var inn=document.createElement('div');inn.className='pz-faq-in';p.parentNode.insertBefore(w,p);w.appendChild(inn);inn.appendChild(p);}
+      var w2=wrapOf(it); if(!w2)return;
+      w2.style.display='block'; w2.style.overflow='hidden'; w2.style.height='0px';
+      if(idx===0){it.classList.add('pz-open'); w2.style.height=innerOf(it).scrollHeight+'px';}
+      h.addEventListener('click',function(){
+        var open=it.classList.contains('pz-open');
+        items.forEach(function(o){ if(o!==it && o.classList.contains('pz-open')){ o.classList.remove('pz-open'); slide(o,0);} });
+        if(open){ it.classList.remove('pz-open'); slide(it,0); }
+        else { it.classList.add('pz-open'); slide(it, innerOf(it).scrollHeight); }
+      });
     });
-  });
+  })();
 
-  /* S2 slider motion / champion emphasis rotation */
+    /* S2 slider motion / champion emphasis rotation */
   
   (function(){
     var box=document.querySelector('#champStrip');
