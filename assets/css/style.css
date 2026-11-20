@@ -337,6 +337,14 @@ input[type=password]{padding-right:40px}
 #squadArea .squad-flex{flex-direction:row}
 #squadArea .squad-photo{flex:0 0 44%;min-height:290px;width:auto}
 #sec-users table{table-layout:fixed;min-width:0!important}
+/* Admin R2-01 remainder (panel order 2026-11-20): explicit column widths + tighter padding so the ACTIONS column sits fully inside the panel at every desktop width (V10 20k pattern) */
+#sec-users th:nth-child(1){width:24%}
+#sec-users th:nth-child(2){width:27%}
+#sec-users th:nth-child(3){width:13%}
+#sec-users th:nth-child(4){width:14%}
+#sec-users th:nth-child(5){width:22%}
+#sec-users th,#sec-users td{padding:8px 6px}
+#sec-users .btn.small{padding:5px 8px;font-size:11px;white-space:nowrap}
 #sec-users .table-wrap{overflow-x:visible}
 #sec-users td,#sec-users th{overflow-wrap:break-word}
 #sec-users th:nth-child(1){width:24%}#sec-users th:nth-child(2){width:27%}#sec-users th:nth-child(3){width:14%}#sec-users th:nth-child(4){width:14%}#sec-users th:nth-child(5){width:21%}
