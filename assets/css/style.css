@@ -401,8 +401,9 @@ input[type=password]{padding-right:40px}
 
 /* ===== Phone points P-08/P-09/P-11 (Snow phone check, 2026-11-20) ===== */
 @media(max-width:640px){
-.strip .champ{flex:0 0 44vw}
-.strip .champ.centre{flex:0 0 82vw}
+.champ-band .wrap{padding:0 10px}
+.strip .champ{flex:0 0 42%}
+.strip .champ.centre{flex:0 0 84%}
 .tcard .slot-poster{padding:10px 6px}
 .tcard .slot-label{font-size:10px;letter-spacing:.03em;padding:2px 4px}
 .filter-chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;justify-content:stretch}
