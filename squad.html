@@ -5,16 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>My Squad - PlayZyro</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='15' fill='none' stroke='%23b6ff2e' stroke-width='3'/%3E%3Ctext x='22' y='30' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23b6ff2e'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-19b">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20a">
 <script>window.PZ_VARIANT = 'v6';</script>
-<script src="assets/js/app.js?v=2026-11-19b"></script>
+<script src="assets/js/app.js?v=2026-11-20a"></script>
 </head>
 <body>
 <header class="site"><div class="header-in">
 <a class="logo" href="index.html"><svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="15" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><path d="M22 2v9M22 33v9M2 22h9M33 22h9" stroke="#b6ff2e" stroke-width="2.5"/><text x="22" y="29" text-anchor="middle" font-family="Arial Narrow,Arial" font-weight="700" font-size="17" fill="#b6ff2e">Z</text></svg><span class="wordmark">PLAY<b>Z</b>YRO</span></a>
 <nav class="main"><a href="index.html">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html">About</a><a href="dashboard.html" class="active">Dashboard</a><a href="admin.html">Admin</a></nav>
 <div class="header-actions"><span class="user-chip" data-user-chip hidden></span><a class="btn" href="auth.html">Login</a></div>
+<button class="nav-toggle" type="button" data-nav-toggle aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </div></header>
+<div class="drawer-backdrop" data-drawer-backdrop hidden></div>
+<aside class="drawer" data-drawer aria-hidden="true">
+<div class="drawer-head"><span class="wordmark">PLAY<b>Z</b>YRO</span><button class="drawer-close" type="button" data-drawer-close aria-label="Close menu">&times;</button></div>
+<nav class="drawer-nav"><a href="index.html">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html">About</a><a href="dashboard.html" class="active">Dashboard</a><a href="admin.html">Admin</a></nav>
+<div class="drawer-foot"><span class="user-chip" data-user-chip hidden></span><a class="btn block" href="auth.html" data-drawer-login>Login</a></div>
+</aside>
 <main class="wrap">
 
 <section class="block">
@@ -32,7 +39,7 @@
 <p class="muted">playzyro.xyz</p></div>
 <div><h3>Footer Links</h3><ul><li><a href="index.html">Home</a></li><li><a href="tournaments.html">Tournaments</a></li><li><a href="about.html">About Us</a></li><li><a href="terms.html">Terms and Conditions</a></li></ul></div>
 <div><h3>Your Panel</h3><ul><li><a href="dashboard.html">Dashboard</a></li><li><a href="squad.html">My Squad</a></li><li><a href="squad-create.html">Create Squad</a></li><li><a href="squad-join.html">Join Squad</a></li></ul></div>
-<div><h3>Social</h3><p class="muted">Social links: to be provided by the client.</p></div>
+<div><h3>Contact</h3><p class="muted">Contact email: to be provided by the client</p><p class="muted">Social links: to be provided by the client.</p></div>
 </div>
 <p class="demo-note">Demo preview: sample accounts, tournaments and squads labelled Demo or Example are preview data only. Real tournaments, winners, posters and photos are added by the admin / provided by the client.</p>
 <div class="footer-bottom">PlayZyro. All rights reserved. <span style="float:right">playzyro.xyz</span></div>
@@ -50,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   document.getElementById('sqCode').textContent = 'Join code: ' + squad.joinCode;
   var html = '<h2>' + PZ.esc(squad.name) + '</h2>' +
-    '<div class="grid2" style="align-items:start"><div class="ph tall">Team Photo Placeholder</div><div>' +
+    '<div class="grid2" style="align-items:start"><div class="slot slot-team tall"><svg width="52" height="52" viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="6" width="15" height="15" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><rect x="27" y="6" width="15" height="15" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><rect x="6" y="27" width="15" height="15" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><rect x="27" y="27" width="15" height="15" fill="#b6ff2e"/></svg><span class="slot-label">Team Photo Placeholder</span></div><div>' +
     '<p class="muted">Join code: <span class="mono" style="color:var(--lime);font-size:19px">' + PZ.esc(squad.joinCode) + '</span></p>' +
     '<p><button class="btn small" id="copyCode" type="button">Copy Code</button></p>' +
     '<p class="muted">Members: ' + squad.memberIds.length + ' of 5. A squad needs at least 4 members to apply for a tournament.</p>' +

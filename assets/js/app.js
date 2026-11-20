@@ -3,7 +3,7 @@
    tournaments and room credentials are created through the site's own flows.
    Mirrors the later WordPress tables: users, squads, tournaments, events,
    applications, assignments, rooms. */
-window.PZ_VERSION = '2026-11-19b';
+window.PZ_VERSION = '2026-11-20a';
 (function () {
   var V = window.PZ_VARIANT || 'vx';
   var KEY = 'pz_' + V + '_db_v1';
@@ -125,4 +125,30 @@ window.PZ_VERSION = '2026-11-19b';
   };
   window.PZ = PZ;
   document.addEventListener('DOMContentLoaded', function () { PZ.mountUserChip(); });
+  /* Mobile drawer: slide-in panel with backdrop, wired once for every page. */
+  document.addEventListener('DOMContentLoaded', function () {
+    var drawer = document.querySelector('[data-drawer]');
+    if (!drawer) return;
+    var backdrop = document.querySelector('[data-drawer-backdrop]');
+    var toggles = document.querySelectorAll('[data-nav-toggle]');
+    function setOpen(open) {
+      drawer.classList.toggle('open', open);
+      drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      if (backdrop) backdrop.hidden = !open;
+      toggles.forEach(function (b) { b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    toggles.forEach(function (b) { b.addEventListener('click', function () { setOpen(true); }); });
+    var closeBtn = drawer.querySelector('[data-drawer-close]');
+    if (closeBtn) closeBtn.addEventListener('click', function () { setOpen(false); });
+    if (backdrop) backdrop.addEventListener('click', function () { setOpen(false); });
+    drawer.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+    if (PZ.session()) {
+      var chip = drawer.querySelector('[data-user-chip]');
+      if (chip) chip.hidden = false;
+      var loginBtn = drawer.querySelector('[data-drawer-login]');
+      if (loginBtn) loginBtn.style.display = 'none';
+    }
+  });
 })();

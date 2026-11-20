@@ -5,16 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tournament Details - PlayZyro</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='15' fill='none' stroke='%23b6ff2e' stroke-width='3'/%3E%3Ctext x='22' y='30' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23b6ff2e'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-19b">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20a">
 <script>window.PZ_VARIANT = 'v6';</script>
-<script src="assets/js/app.js?v=2026-11-19b"></script>
+<script src="assets/js/app.js?v=2026-11-20a"></script>
 </head>
 <body>
 <header class="site"><div class="header-in">
 <a class="logo" href="index.html"><svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="15" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><path d="M22 2v9M22 33v9M2 22h9M33 22h9" stroke="#b6ff2e" stroke-width="2.5"/><text x="22" y="29" text-anchor="middle" font-family="Arial Narrow,Arial" font-weight="700" font-size="17" fill="#b6ff2e">Z</text></svg><span class="wordmark">PLAY<b>Z</b>YRO</span></a>
 <nav class="main"><a href="index.html">Home</a><a href="tournaments.html" class="active">Tournaments</a><a href="about.html">About</a><a href="dashboard.html">Dashboard</a><a href="admin.html">Admin</a></nav>
 <div class="header-actions"><span class="user-chip" data-user-chip hidden></span><a class="btn" href="auth.html">Login</a></div>
+<button class="nav-toggle" type="button" data-nav-toggle aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </div></header>
+<div class="drawer-backdrop" data-drawer-backdrop hidden></div>
+<aside class="drawer" data-drawer aria-hidden="true">
+<div class="drawer-head"><span class="wordmark">PLAY<b>Z</b>YRO</span><button class="drawer-close" type="button" data-drawer-close aria-label="Close menu">&times;</button></div>
+<nav class="drawer-nav"><a href="index.html">Home</a><a href="tournaments.html" class="active">Tournaments</a><a href="about.html">About</a><a href="dashboard.html">Dashboard</a><a href="admin.html">Admin</a></nav>
+<div class="drawer-foot"><span class="user-chip" data-user-chip hidden></span><a class="btn block" href="auth.html" data-drawer-login>Login</a></div>
+</aside>
 <main class="wrap">
 
 <section class="block">
@@ -29,7 +36,7 @@
 <p class="muted">playzyro.xyz</p></div>
 <div><h3>Footer Links</h3><ul><li><a href="index.html">Home</a></li><li><a href="tournaments.html">Tournaments</a></li><li><a href="about.html">About Us</a></li><li><a href="terms.html">Terms and Conditions</a></li></ul></div>
 <div><h3>Your Panel</h3><ul><li><a href="dashboard.html">Dashboard</a></li><li><a href="squad.html">My Squad</a></li><li><a href="squad-create.html">Create Squad</a></li><li><a href="squad-join.html">Join Squad</a></li></ul></div>
-<div><h3>Social</h3><p class="muted">Social links: to be provided by the client.</p></div>
+<div><h3>Contact</h3><p class="muted">Contact email: to be provided by the client</p><p class="muted">Social links: to be provided by the client.</p></div>
 </div>
 <p class="demo-note">Demo preview: sample accounts, tournaments and squads labelled Demo or Example are preview data only. Real tournaments, winners, posters and photos are added by the admin / provided by the client.</p>
 <div class="footer-bottom">PlayZyro. All rights reserved. <span style="float:right">playzyro.xyz</span></div>
@@ -50,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var assigned = squad && PZ.isAssigned(squad.id, t.id);
   var room = user ? PZ.roomFor(user, t.id) : null;
   var html = '<div class="hud-head" style="border-bottom:none;margin-bottom:6px"><h1 style="margin:0">' + PZ.esc(t.name) + '</h1><span class="tag">' + PZ.esc(t.status) + '</span></div>' +
-    '<div class="hud"><div class="grid2" style="align-items:start"><div class="ph tall">Poster Placeholder</div>' +
+    '<div class="hud"><div class="grid2" style="align-items:start"><div class="slot slot-poster tall"><svg width="52" height="52" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="13" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><path d="M22 2v10M22 32v10M2 22h10M32 22h10" stroke="#b6ff2e" stroke-width="2.5"/><circle cx="22" cy="22" r="3" fill="#b6ff2e"/></svg><span class="slot-label">Poster Placeholder</span></div>' +
     '<div><h3>Tournament Details</h3><div class="table-wrap"><table style="min-width:0"><tbody>' +
     '<tr><th style="width:38%">Mode</th><td>' + PZ.esc(t.mode) + '</td></tr>' +
     '<tr><th>Date</th><td>' + PZ.esc(t.dateText) + '</td></tr>' +
@@ -86,6 +93,22 @@ document.addEventListener('DOMContentLoaded', function () {
   html += '<div class="hud" style="margin-top:20px"><div class="hud-head"><h3>Squads Applied</h3></div>';
   html += names.length ? names.map(function (n) { return '<div class="enroll-row"><span>' + PZ.esc(n) + '</span></div>'; }).join('') : '<p class="muted" style="margin:0">No squads have applied yet.</p>';
   html += '</div>';
+  html += '<div class="hud" style="margin-top:20px"><div class="hud-head"><h3>About This Tournament</h3><span class="tag">SEC // Briefing</span></div>' +
+    '<p class="muted" style="margin:0">The details above are the details published for this tournament. Tournaments labelled Demo or Example are preview entries shown so the page can be reviewed; real tournament details are added by the admin and confirmed on this page.</p></div>';
+  html += '<div class="hud" style="margin-top:20px"><div class="hud-head"><h3>How to Apply</h3><span class="tag">SEC // Process</span></div>' +
+    '<div class="apply-steps">' +
+    '<div class="step"><span class="n">01</span><h3>Log In</h3><p>Log in or sign up for your own PlayZyro account.</p></div>' +
+    '<div class="step"><span class="n">02</span><h3>Have a Squad of 4+</h3><p>Create a squad as captain, or join one with its join code. A squad holds 4 to 5 players.</p></div>' +
+    '<div class="step"><span class="n">03</span><h3>Apply</h3><p>Apply from this page. The admin assigns squads, and the Room ID and password are published at match time.</p></div>' +
+    '</div></div>';
+  html += '<div class="hud" style="margin-top:20px"><div class="hud-head"><h3>Rules</h3><span class="tag">SEC // Standing Orders</span></div>' +
+    '<ul class="rules-list">' +
+    '<li>A squad has 4 to 5 players.</li>' +
+    '<li>Each player has one active squad at a time.</li>' +
+    '<li>Applications are reviewed by the admin, who selects and assigns squads.</li>' +
+    '<li>The Room ID and password are published at match time, to assigned squads only.</li>' +
+    '<li>Fair play and respectful conduct, as set out in the <a href="terms.html">Terms and Conditions</a>.</li>' +
+    '</ul></div>';
   box.innerHTML = html;
   var btn = document.getElementById('applyBtn');
   if (btn) {
