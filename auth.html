@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign Up and Login - PlayZyro</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='15' fill='none' stroke='%23b6ff2e' stroke-width='3'/%3E%3Ctext x='22' y='30' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23b6ff2e'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-19b">
+<script>window.PZ_VARIANT = 'v6';</script>
+<script src="assets/js/app.js?v=2026-11-19b"></script>
+</head>
+<body>
+<div class="auth-top">
+<a class="logo" href="index.html"><svg width="40" height="40" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="15" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><path d="M22 2v9M22 33v9M2 22h9M33 22h9" stroke="#b6ff2e" stroke-width="2.5"/><text x="22" y="29" text-anchor="middle" font-family="Arial Narrow,Arial" font-weight="700" font-size="17" fill="#b6ff2e">Z</text></svg><span class="wordmark">PLAY<b>Z</b>YRO</span></a>
+<a class="btn small ghost" href="index.html">&#8249; Back to Home</a>
+</div>
+<main>
+<div class="auth-scene">
+<div class="hud auth-list">
+<div class="hud-head"><h3>Active Tournaments</h3></div>
+<ul id="activeList" style="list-style:none;margin:0;padding:0"></ul>
+<p class="muted" style="margin:12px 0 0">Sign up or log in to build your squad and apply.</p>
+</div>
+<div class="hud auth-panel">
+<div class="tabs">
+<button id="tabSignup" class="on" type="button">[ Sign Up ]</button>
+<button id="tabLogin" type="button">[ Login ]</button>
+</div>
+<div class="form-msg" id="authMsg"></div>
+<form id="signupForm" autocomplete="off">
+<label for="su_name">Username</label>
+<input id="su_name" required placeholder="Enter your username">
+<label for="su_email">Email Address</label>
+<input id="su_email" type="email" required placeholder="Enter your email">
+<label for="su_pass">Password</label>
+<input id="su_pass" type="password" required placeholder="Choose a password">
+<label for="su_pass2">Confirm Password</label>
+<input id="su_pass2" type="password" required placeholder="Repeat your password">
+<div class="check"><input type="checkbox" id="su_terms" required><label for="su_terms">I accept the <a href="terms.html">Terms &amp; Conditions</a></label></div>
+<button class="btn block" type="submit" style="margin-top:18px">Sign Up Now</button>
+<p class="muted" style="margin-top:12px">Already have an account? <a href="#" id="goLogin">Log in</a></p>
+</form>
+<form id="loginForm" autocomplete="off" style="display:none">
+<label for="li_who">Username or Email</label>
+<input id="li_who" required placeholder="Enter your username or email">
+<label for="li_pass">Password</label>
+<input id="li_pass" type="password" required placeholder="Enter your password">
+<button class="btn block" type="submit" style="margin-top:18px">Log In</button>
+<p class="muted" style="margin-top:12px">New to PlayZyro? <a href="#" id="goSignup">Sign up</a></p>
+</form>
+<div class="demo-box">Demo accounts (preview only): demo_admin / demo1234 and DemoPlayer / demo1234</div>
+</div>
+</div>
+<p class="auth-foot">PlayZyro. All rights reserved. - playzyro.xyz</p>
+</main>
+<script>
+
+function showTab(which) {
+  document.getElementById('signupForm').style.display = which === 'signup' ? 'block' : 'none';
+  document.getElementById('loginForm').style.display = which === 'login' ? 'block' : 'none';
+  document.getElementById('tabSignup').classList.toggle('on', which === 'signup');
+  document.getElementById('tabLogin').classList.toggle('on', which === 'login');
+}
+function msg(text, ok) { var m = document.getElementById('authMsg'); m.style.display = 'block'; m.className = 'form-msg ' + (ok ? 'ok' : 'err'); m.textContent = text; }
+document.addEventListener('DOMContentLoaded', function () {
+  var ul = document.getElementById('activeList');
+  PZ.db.tournaments.forEach(function (t) {
+    var li = document.createElement('li');
+    li.style.cssText = 'border-bottom:1px solid #39491d;padding:9px 2px';
+    li.innerHTML = '<a href="tournament.html?id=' + t.id + '">' + PZ.esc(t.name) + '</a> <span class="muted">- ' + PZ.esc(t.status) + '</span>';
+    ul.appendChild(li);
+  });
+  document.getElementById('tabSignup').addEventListener('click', function () { showTab('signup'); });
+  document.getElementById('tabLogin').addEventListener('click', function () { showTab('login'); });
+  document.getElementById('goLogin').addEventListener('click', function (e) { e.preventDefault(); showTab('login'); });
+  document.getElementById('goSignup').addEventListener('click', function (e) { e.preventDefault(); showTab('signup'); });
+  var next = PZ.qs('next');
+  document.getElementById('signupForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var p1 = document.getElementById('su_pass').value, p2 = document.getElementById('su_pass2').value;
+    if (p1 !== p2) { msg('Passwords do not match.', false); return; }
+    var r = PZ.signup(document.getElementById('su_name').value.trim(), document.getElementById('su_email').value.trim(), p1);
+    if (r.error) { msg(r.error, false); return; }
+    msg('Account created. Taking you to your dashboard.', true);
+    setTimeout(function () { location.href = next || 'dashboard.html'; }, 700);
+  });
+  document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var u = PZ.login(document.getElementById('li_who').value.trim(), document.getElementById('li_pass').value);
+    if (!u) { msg('Login failed. Check your username and password.', false); return; }
+    msg('Logged in as ' + u.username + '.', true);
+    setTimeout(function () { location.href = u.role === 'admin' ? 'admin.html' : (next || 'dashboard.html'); }, 700);
+  });
+  if (PZ.qs('mode') === 'login') showTab('login');
+});
+
+</script>
+</body>
+</html>

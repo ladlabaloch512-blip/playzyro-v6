@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tournaments and Schedule - PlayZyro</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='15' fill='none' stroke='%23b6ff2e' stroke-width='3'/%3E%3Ctext x='22' y='30' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23b6ff2e'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-19b">
+<script>window.PZ_VARIANT = 'v6';</script>
+<script src="assets/js/app.js?v=2026-11-19b"></script>
+</head>
+<body>
+<header class="site"><div class="header-in">
+<a class="logo" href="index.html"><svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="15" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><path d="M22 2v9M22 33v9M2 22h9M33 22h9" stroke="#b6ff2e" stroke-width="2.5"/><text x="22" y="29" text-anchor="middle" font-family="Arial Narrow,Arial" font-weight="700" font-size="17" fill="#b6ff2e">Z</text></svg><span class="wordmark">PLAY<b>Z</b>YRO</span></a>
+<nav class="main"><a href="index.html">Home</a><a href="tournaments.html" class="active">Tournaments</a><a href="about.html">About</a><a href="dashboard.html">Dashboard</a><a href="admin.html">Admin</a></nav>
+<div class="header-actions"><span class="user-chip" data-user-chip hidden></span><a class="btn" href="auth.html">Login</a></div>
+</div></header>
+<main class="wrap">
+
+<section class="block">
+<h1 class="center">Tournaments &amp; Schedule</h1>
+<p class="center muted">Sign up, build your squad, and apply for tournaments.</p>
+<div class="chips" style="margin:20px 0;justify-content:center">
+<span class="muted" style="text-transform:uppercase;letter-spacing:.06em;font-size:13px">Tactical Search</span>
+<button class="chip on" data-filter="all">All</button>
+<button class="chip" data-filter="active">Active</button>
+<button class="chip" data-filter="upcoming">Upcoming</button>
+<button class="chip" data-filter="squad">Squad</button>
+<span style="flex:1;min-width:160px"><input id="search" type="search" placeholder="Search tournaments" aria-label="Search tournaments"></span>
+</div>
+<h2 class="outside-label">Featured Tournament</h2>
+<div class="hazard" style="margin-bottom:26px"><div class="hazard-in" id="featuredBanner"></div></div>
+<h2>Upcoming &amp; Active Tournaments</h2>
+<div class="tstrip-wrap">
+<button class="strip-btn" id="cardPrev" aria-label="Previous tournaments">&#8249;</button>
+<div class="tstrip" id="cards"></div>
+<button class="strip-btn" id="cardNext" aria-label="Next tournaments">&#8250;</button>
+</div>
+</section>
+<section class="block">
+<div class="hud">
+<div class="hud-head"><h2>Match Schedule</h2></div>
+<div id="schedGroups"></div>
+</div>
+</section>
+
+</main>
+<footer class="site">
+<div class="footer-grid">
+<div><div class="logo" style="margin-bottom:10px"><svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="15" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><path d="M22 2v9M22 33v9M2 22h9M33 22h9" stroke="#b6ff2e" stroke-width="2.5"/><text x="22" y="29" text-anchor="middle" font-family="Arial Narrow,Arial" font-weight="700" font-size="17" fill="#b6ff2e">Z</text></svg><span class="wordmark">PLAY<b>Z</b>YRO</span></div>
+<p class="muted">Tournaments, schedules, upcoming events and winners for the PlayZyro PUBG community, in one place online.</p>
+<p class="muted">playzyro.xyz</p></div>
+<div><h3>Footer Links</h3><ul><li><a href="index.html">Home</a></li><li><a href="tournaments.html">Tournaments</a></li><li><a href="about.html">About Us</a></li><li><a href="terms.html">Terms and Conditions</a></li></ul></div>
+<div><h3>Your Panel</h3><ul><li><a href="dashboard.html">Dashboard</a></li><li><a href="squad.html">My Squad</a></li><li><a href="squad-create.html">Create Squad</a></li><li><a href="squad-join.html">Join Squad</a></li></ul></div>
+<div><h3>Social</h3><p class="muted">Social links: to be provided by the client.</p></div>
+</div>
+<p class="demo-note">Demo preview: sample accounts, tournaments and squads labelled Demo or Example are preview data only. Real tournaments, winners, posters and photos are added by the admin / provided by the client.</p>
+<div class="footer-bottom">PlayZyro. All rights reserved. <span style="float:right">playzyro.xyz</span></div>
+</footer>
+<script>
+
+var currentFilter = 'all';
+function matches(t) {
+  var q = document.getElementById('search').value.toLowerCase();
+  if (q && t.name.toLowerCase().indexOf(q) === -1) return false;
+  if (currentFilter === 'all') return true;
+  if (currentFilter === 'active') return t.status === 'Registration Open';
+  if (currentFilter === 'upcoming') return t.status === 'Upcoming';
+  if (currentFilter === 'squad') return t.mode === 'Squad';
+  return true;
+}
+function schedCard(t) {
+  return '<div class="sched-card"><span class="role">' + PZ.esc(t.mode) + ' Match</span><h3 style="margin:6px 0">' + PZ.esc(t.name) + '</h3>' +
+    '<p class="muted" style="margin:0 0 12px">' + PZ.esc(t.dateText) + (t.timeText ? ' - ' + PZ.esc(t.timeText) : '') + '<br>Status: ' + PZ.esc(t.status) + '</p>' +
+    '<a class="btn small" href="tournament.html?id=' + t.id + '">Register</a></div>';
+}
+function render() {
+  var cards = document.getElementById('cards'); cards.innerHTML = '';
+  var groups = document.getElementById('schedGroups'); groups.innerHTML = '';
+  var shown = PZ.db.tournaments.filter(matches);
+  shown.forEach(function (t) {
+    var d = document.createElement('div'); d.className = 'tcard';
+    d.innerHTML = '<div class="ph">Poster Placeholder</div><div class="tcard-body"><h3>' + PZ.esc(t.name) + '</h3>' +
+      '<p class="muted">Mode: ' + PZ.esc(t.mode) + '<br>Date: ' + PZ.esc(t.dateText) + '<br>Prize: To be confirmed<br>Status: ' + PZ.esc(t.status) + '</p>' +
+      '<a class="btn small" href="tournament.html?id=' + t.id + '">View &amp; Register</a></div>';
+    cards.appendChild(d);
+  });
+  if (!shown.length) { cards.innerHTML = '<p class="muted">No tournaments match your search yet. Tournaments added by the admin will appear here.</p>'; }
+  ['Registration Open', 'Upcoming'].forEach(function (st) {
+    var list = shown.filter(function (t) { return t.status === st; });
+    if (!list.length) return;
+    var g = document.createElement('div');
+    g.innerHTML = '<h3 class="sched-day">' + PZ.esc(st) + '</h3><div class="sched-rail">' + list.map(schedCard).join('') + '</div>';
+    groups.appendChild(g);
+  });
+  if (!shown.length) { groups.innerHTML = '<p class="muted" style="margin:0">No scheduled matches yet.</p>'; }
+}
+document.addEventListener('DOMContentLoaded', function () {
+  var t = PZ.db.tournaments[0];
+  var b = document.getElementById('featuredBanner');
+  if (t) {
+    b.innerHTML = '<div class="grid2" style="align-items:center"><div class="ph tall">Poster Placeholder</div>' +
+      '<div><h2 class="feat-title">' + PZ.esc(t.name) + '<span class="feat-tag">[ Featured ]</span></h2><p class="muted">Status: ' + PZ.esc(t.status) + '<br>Date: ' + PZ.esc(t.dateText) + '<br>Prize: To be confirmed</p>' +
+      '<a class="btn" href="tournament.html?id=' + t.id + '">Register Now</a></div></div>';
+  } else {
+    b.innerHTML = '<div class="ph tall">Poster Placeholder</div><p class="muted" style="margin-top:12px">Tournament title placeholder. Tournaments added by the admin will appear here.</p>';
+  }
+  document.querySelectorAll('[data-filter]').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      document.querySelectorAll('[data-filter]').forEach(function (c) { c.classList.remove('on'); });
+      chip.classList.add('on'); currentFilter = chip.getAttribute('data-filter'); render();
+    });
+  });
+  document.getElementById('search').addEventListener('input', render);
+  var strip = document.getElementById('cards');
+  document.getElementById('cardPrev').addEventListener('click', function () { strip.scrollLeft -= 456; });
+  document.getElementById('cardNext').addEventListener('click', function () { strip.scrollLeft += 456; });
+  render();
+});
+
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var chip = document.querySelector('header.site [data-user-chip]');
+  if (window.PZ && PZ.session()) {
+    document.querySelectorAll('header.site .header-actions .btn').forEach(function (b) { b.style.display = 'none'; });
+    if (chip) chip.hidden = false;
+  }
+});
+</script>
+</body>
+</html>

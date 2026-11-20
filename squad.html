@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Squad - PlayZyro</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='15' fill='none' stroke='%23b6ff2e' stroke-width='3'/%3E%3Ctext x='22' y='30' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23b6ff2e'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-19b">
+<script>window.PZ_VARIANT = 'v6';</script>
+<script src="assets/js/app.js?v=2026-11-19b"></script>
+</head>
+<body>
+<header class="site"><div class="header-in">
+<a class="logo" href="index.html"><svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="15" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><path d="M22 2v9M22 33v9M2 22h9M33 22h9" stroke="#b6ff2e" stroke-width="2.5"/><text x="22" y="29" text-anchor="middle" font-family="Arial Narrow,Arial" font-weight="700" font-size="17" fill="#b6ff2e">Z</text></svg><span class="wordmark">PLAY<b>Z</b>YRO</span></a>
+<nav class="main"><a href="index.html">Home</a><a href="tournaments.html">Tournaments</a><a href="about.html">About</a><a href="dashboard.html" class="active">Dashboard</a><a href="admin.html">Admin</a></nav>
+<div class="header-actions"><span class="user-chip" data-user-chip hidden></span><a class="btn" href="auth.html">Login</a></div>
+</div></header>
+<main class="wrap">
+
+<section class="block">
+<div class="hud">
+<div class="hud-head"><h1 style="font-size:30px">My Squad</h1><span class="tag" id="sqCode"></span></div>
+<div id="sqArea"></div>
+</div>
+</section>
+
+</main>
+<footer class="site">
+<div class="footer-grid">
+<div><div class="logo" style="margin-bottom:10px"><svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="15" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><path d="M22 2v9M22 33v9M2 22h9M33 22h9" stroke="#b6ff2e" stroke-width="2.5"/><text x="22" y="29" text-anchor="middle" font-family="Arial Narrow,Arial" font-weight="700" font-size="17" fill="#b6ff2e">Z</text></svg><span class="wordmark">PLAY<b>Z</b>YRO</span></div>
+<p class="muted">Tournaments, schedules, upcoming events and winners for the PlayZyro PUBG community, in one place online.</p>
+<p class="muted">playzyro.xyz</p></div>
+<div><h3>Footer Links</h3><ul><li><a href="index.html">Home</a></li><li><a href="tournaments.html">Tournaments</a></li><li><a href="about.html">About Us</a></li><li><a href="terms.html">Terms and Conditions</a></li></ul></div>
+<div><h3>Your Panel</h3><ul><li><a href="dashboard.html">Dashboard</a></li><li><a href="squad.html">My Squad</a></li><li><a href="squad-create.html">Create Squad</a></li><li><a href="squad-join.html">Join Squad</a></li></ul></div>
+<div><h3>Social</h3><p class="muted">Social links: to be provided by the client.</p></div>
+</div>
+<p class="demo-note">Demo preview: sample accounts, tournaments and squads labelled Demo or Example are preview data only. Real tournaments, winners, posters and photos are added by the admin / provided by the client.</p>
+<div class="footer-bottom">PlayZyro. All rights reserved. <span style="float:right">playzyro.xyz</span></div>
+</footer>
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+  var user = PZ.requireAuth(); if (!user) return;
+  var squad = PZ.mySquad(user.id);
+  var area = document.getElementById('sqArea');
+  if (!squad) {
+    area.innerHTML = '<p class="muted">You are not in a squad yet. A squad has 4 to 5 members: the captain creates it, and members join through its code.</p>' +
+      '<p><a class="btn" href="squad-create.html">Create Squad</a> <a class="btn ghost" href="squad-join.html">Join Squad by Code</a></p>';
+    return;
+  }
+  document.getElementById('sqCode').textContent = 'Join code: ' + squad.joinCode;
+  var html = '<h2>' + PZ.esc(squad.name) + '</h2>' +
+    '<div class="grid2" style="align-items:start"><div class="ph tall">Team Photo Placeholder</div><div>' +
+    '<p class="muted">Join code: <span class="mono" style="color:var(--lime);font-size:19px">' + PZ.esc(squad.joinCode) + '</span></p>' +
+    '<p><button class="btn small" id="copyCode" type="button">Copy Code</button></p>' +
+    '<p class="muted">Members: ' + squad.memberIds.length + ' of 5. A squad needs at least 4 members to apply for a tournament.</p>' +
+    '<p><a class="btn small ghost" href="tournaments.html">Apply for a Tournament</a></p></div></div><div style="margin-top:18px">';
+  squad.memberIds.forEach(function (mid, i) {
+    var m = PZ.user(mid);
+    html += '<div class="member-row"><span><span class="who">' + (i + 1) + '. ' + PZ.esc(m ? m.username : 'Member') + '</span> <span class="role">' + (mid === squad.captainId ? 'Captain' : 'Member') + '</span></span><span class="ready">Ready</span></div>';
+  });
+  for (var k = squad.memberIds.length; k < 5; k++) { html += '<div class="member-row"><span class="muted">Empty slot - share your join code to fill it</span></div>'; }
+  html += '</div>';
+  area.innerHTML = html;
+  document.getElementById('copyCode').addEventListener('click', function () {
+    var ta = document.createElement('textarea');
+    ta.value = squad.joinCode;
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    ta.remove();
+    PZ.toast('Join code copied: ' + squad.joinCode);
+  });
+});
+
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var chip = document.querySelector('header.site [data-user-chip]');
+  if (window.PZ && PZ.session()) {
+    document.querySelectorAll('header.site .header-actions .btn').forEach(function (b) { b.style.display = 'none'; });
+    if (chip) chip.hidden = false;
+  }
+});
+</script>
+</body>
+</html>
