@@ -149,6 +149,8 @@ tr:last-child td{border-bottom:none}
 .auth-list{flex:0 0 252px}
 .auth-panel{flex:0 1 480px;width:100%}
 .auth-foot{text-align:center;color:var(--muted);font-size:13px;padding:0 18px 24px}
+.auth-honest{text-align:center;color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:0 18px 6px;margin:0}
+.auth-honest.last{padding-bottom:24px}
 /* forms */
 label{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:14px 0 6px}
 input,select,textarea{width:100%;background:#10160a;border:1px solid var(--line2);color:var(--text);padding:11px 12px;font-size:15px;font-family:inherit}
@@ -288,3 +290,34 @@ footer.site a:hover{color:var(--lime)}
  .kv{grid-template-columns:1fr 1fr}
  .feat-overlay{bottom:64px}
 }
+
+/* ===== PlayZyro Animations R1 (panel-approved S1-S5 + O1-O4, Chat 3) =====
+   Rules: content visible on load, entrance starts from visible, no scroll-reveal,
+   animations are never gated on any motion preference setting. */
+.btn{transition:background-color .16s ease,color .16s ease,border-color .16s ease,transform .12s ease}
+.btn:active{transform:scale(.98)}
+.main-nav a,nav.main a,.drawer-nav a{transition:color .15s ease,background-color .15s ease}
+@keyframes pzHero{0%{transform:translateY(10px) scale(.99);opacity:.92}60%{transform:translateY(3px) scale(.997);opacity:.98}100%{transform:translateY(0) scale(1);opacity:1}}
+.hero{animation:pzHero .45s ease-out}
+
+@media (hover:hover) and (pointer:fine){
+  .feat-card,.champ{transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+  .feat-card:hover,.champ:hover{transform:translateY(-3px);border-color:#6b8a2f;box-shadow:0 10px 24px rgba(0,0,0,.4)}
+}
+.pz-prog{height:3px;background:#4a5d23;margin-top:10px;overflow:hidden}
+.pz-prog i{display:block;height:100%;width:0;background:#b6ff2e;transition:width .3s ease}
+.strip{scroll-behavior:smooth;scroll-snap-type:x proximity}
+.strip .champ{scroll-snap-align:start}
+.pz-faq-q{cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pz-chev{flex:none;width:24px;height:24px;border:1px solid #6b8a2f;color:#b6ff2e;font-family:var(--mono);display:inline-flex;align-items:center;justify-content:center;transition:transform .3s ease}
+.pz-chev::after{content:"+"}
+.pz-open .pz-chev{transform:rotate(45deg)}
+.pz-faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.pz-faq-in{overflow:hidden;min-height:0}
+.pz-msg-in{animation:pzMsg .2s ease-out}
+@keyframes pzMsg{from{opacity:.35;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.pz-swap{animation:pzSwap .16s ease-out}
+@keyframes pzSwap{from{opacity:.45}to{opacity:1}}
+.pz-reveal{animation:pzReveal .5s ease-out}
+@keyframes pzReveal{from{opacity:.55;transform:scale(.985)}to{opacity:1;transform:scale(1)}}
+
