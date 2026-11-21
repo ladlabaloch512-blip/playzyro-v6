@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>My Squad - PlayZyro</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='15' fill='none' stroke='%23b6ff2e' stroke-width='3'/%3E%3Ctext x='22' y='30' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23b6ff2e'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20l">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20m">
 <script>window.PZ_VARIANT = 'v6';</script>
-<script src="assets/js/app.js?v=2026-11-20l"></script>
+<script src="assets/js/app.js?v=2026-11-20m"></script>
 </head>
 <body>
 <header class="site"><div class="header-in">
@@ -51,12 +51,12 @@ document.addEventListener('DOMContentLoaded', function () {
   var squad = PZ.mySquad(user.id);
   var area = document.getElementById('sqArea');
   if (!squad) {
-    area.innerHTML = '<p class="muted">You are not in a squad yet. A squad has 4 to 5 members: the captain creates it, and members join through its code.</p>' +
+    area.innerHTML = '<svg class="pz-empty-ic" aria-hidden="true"><use href="assets/img/pz-icons.svg#pz-helmet-s"/></svg><p class="muted">You are not in a squad yet. A squad has 4 to 5 members: the captain creates it, and members join through its code.</p>' +
       '<p><a class="btn" href="squad-create.html">Create Squad</a> <a class="btn ghost" href="squad-join.html">Join Squad by Code</a></p>';
     return;
   }
   var html = '<h2>' + PZ.esc(squad.name) + '</h2>' +
-    '<div class="grid2" style="align-items:start"><div class="slot slot-team tall"><svg width="52" height="52" viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="6" width="15" height="15" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><rect x="27" y="6" width="15" height="15" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><rect x="6" y="27" width="15" height="15" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><rect x="27" y="27" width="15" height="15" fill="#b6ff2e"/></svg><span class="slot-label">Team Photo Placeholder</span></div><div>' +
+    '<div class="grid2" style="align-items:start"><div class="slot slot-team tall has-art"><img class="pz-art" src="assets/img/art-poster-b.jpg" alt=""><span class="slot-label">Team Artwork</span></div><div>' +
     '<p class="muted">Join code: <span class="mono" style="color:var(--lime);font-size:19px">' + PZ.esc(squad.joinCode) + '</span> <button class="btn small ghost" id="copyCode" type="button">Copy Code</button></p>' +
     '<p class="muted">Members: ' + squad.memberIds.length + ' of 5. A squad needs at least 4 members to apply for a tournament.</p>' +
     '<p><a class="btn small" href="tournaments.html">Apply for a Tournament</a></p></div></div><div style="margin-top:18px">';

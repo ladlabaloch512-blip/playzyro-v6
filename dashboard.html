@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>User Dashboard - PlayZyro</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='15' fill='none' stroke='%23b6ff2e' stroke-width='3'/%3E%3Ctext x='22' y='30' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23b6ff2e'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20l">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20m">
 <script>window.PZ_VARIANT = 'v6';</script>
-<script src="assets/js/app.js?v=2026-11-20l"></script>
+<script src="assets/js/app.js?v=2026-11-20m"></script>
 </head>
 <body>
 <header class="site"><div class="header-in">
@@ -83,12 +83,12 @@ document.addEventListener('DOMContentLoaded', function () {
     for (var k = squad.memberIds.length; k < 5; k++) {
       rows += '<div class="member-row"><span style="display:flex;align-items:center;gap:10px"><span class="avatar-sm">?</span><span class="muted">Empty slot - invite a player with your join code</span></span></div>';
     }
-    var html = '<div class="squad-flex"><div class="slot slot-team squad-photo"><svg width="46" height="46" viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="6" width="15" height="15" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><rect x="27" y="6" width="15" height="15" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><rect x="6" y="27" width="15" height="15" fill="none" stroke="#b6ff2e" stroke-width="2.5"/><rect x="27" y="27" width="15" height="15" fill="#b6ff2e"/></svg><span class="slot-label">Team Photo Placeholder</span></div><div class="squad-roster">' + rows + '</div></div>';
+    var html = '<div class="squad-flex"><div class="slot slot-team squad-photo has-art"><img class="pz-art" src="assets/img/art-poster-b.jpg" alt=""><span class="slot-label">Team Artwork</span></div><div class="squad-roster">' + rows + '</div></div>';
     html += '<p style="margin-top:12px"><a class="btn small" href="squad.html">Open My Squad</a></p>';
     sArea.innerHTML = html;
   } else {
     document.getElementById('squadTitle').textContent = 'My Squad';
-    sArea.innerHTML = '<p class="muted">You are not in a squad yet. Create a squad as captain, or join one with a code. A squad has 4 to 5 members.</p>' +
+    sArea.innerHTML = '<svg class="pz-empty-ic" aria-hidden="true"><use href="assets/img/pz-icons.svg#pz-backpack-s"/></svg><p class="muted">You are not in a squad yet. Create a squad as captain, or join one with a code. A squad has 4 to 5 members.</p>' +
       '<p><a class="btn" href="squad-create.html">Create Squad</a> <a class="btn ghost" href="squad-join.html">Join Squad</a></p>';
   }
   var mine = PZ.myTournaments(user);

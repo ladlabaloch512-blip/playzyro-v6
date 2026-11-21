@@ -410,3 +410,22 @@ input[type=password]{padding-right:40px}
 .filter-chips>span{grid-column:1/-1}
 .filter-chips .chip{width:100%}
 }
+
+/* ===== PUBG-look update: artwork + SVG element set (2026-11-21) ===== */
+.hero-band{background-image:linear-gradient(100deg,rgba(13,17,7,.90) 28%,rgba(13,17,7,.55) 62%,rgba(13,17,7,.72)),url("../../assets/img/art-hero.jpg");background-size:cover;background-position:center}
+.hero{position:relative}
+.pz-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.has-art{position:relative;overflow:hidden}
+.has-art .slot-label{position:absolute;left:8px;bottom:8px;z-index:2;background:rgba(8,10,4,.72);color:var(--text);padding:2px 8px;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.slot.feat-poster .slot-label{bottom:auto;top:8px}
+.pz-ic{width:20px;height:20px;vertical-align:-4px;margin-right:8px}
+.pz-foot .pz-ic{margin-right:6px}
+.pz-stk{width:56px;height:56px}
+.pz-cluster{display:flex;gap:14px;justify-content:center;margin:0 auto 12px}
+.pz-corner{position:absolute;top:8px;right:8px;width:24px;height:24px;z-index:3}
+.tcard{position:relative}
+.pz-empty-ic{display:block;width:84px;height:84px;margin:0 auto 10px}
+.pz-hero-ic{position:absolute;z-index:2}
+.pz-h1{right:8px;top:2px;width:52px;height:52px}
+.pz-h2{right:76px;top:64px;width:38px;height:38px;opacity:.85}
+@media(max-width:640px){.pz-h1{right:4px;top:0;width:36px;height:36px}.pz-h2{display:none}.pz-stk{width:46px;height:46px}}
